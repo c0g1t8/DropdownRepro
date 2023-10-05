@@ -1,0 +1,29 @@
+﻿@page "/"
+
+<div>
+    Selection: @_selection
+</div>
+
+<div>
+    <vscode-dropdown value="@_selection" current-value="@_selection" @onchange="@(e => _selection = e.Value?.ToString() ?? "")">
+        <vscode-option value="">Select ...</vscode-option>
+        @foreach (var item in _options) {
+        <vscode-option value="@item">[@item]</vscode-option>
+        }
+    </vscode-dropdown>
+</div>
+
+<div>
+    <vscode-button @onclick="AddAndSelect">Add and select</vscode-button>
+</div>
+
+@code {
+    string _selection = "";
+    string[] _options = Array.Empty<string>();
+
+    void AddAndSelect()
+    {
+        _selection = "A";
+        _options = new[] { "A", "B", "C" };
+    }
+}
